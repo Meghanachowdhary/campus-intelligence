@@ -1,0 +1,13 @@
+{
+  "name": "events-mcp-server",
+  "version": "1.0.0",
+  "description": "Events MCP Server for campus workshops and social calendar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "library-mcp-server",
+  "version": "1.0.0",
+  "description": "Library MCP Server for campus books and reservations",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1"
+  }
+}
