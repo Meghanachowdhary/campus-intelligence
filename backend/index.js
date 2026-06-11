@@ -676,6 +676,22 @@ Personalization context: The current student's name is ${personalization?.name |
   }
 });
 
+// Serve static frontend in production
+const distPath = path.resolve(__dirname, "../frontend/dist");
+app.use(express.static(distPath));
+
+// Fallback for Single Page App routing
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+  res.sendFile(path.resolve(distPath, "index.html"), (err) => {
+    if (err) {
+      res.status(404).send("Frontend production build not found. Please run 'npm run build' in the frontend folder first.");
+    }
+  });
+});
+
 // Start listening and connect to servers
 app.listen(PORT, async () => {
   console.log(`Gateway Express Server listening on http://localhost:${PORT}`);
