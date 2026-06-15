@@ -18,6 +18,10 @@ import {
   Sparkles
 } from "lucide-react";
 
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://localhost:5001"
+  : "";
+
 export default function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
   
@@ -94,7 +98,7 @@ export default function App() {
   const fetchDashboardData = async () => {
     try {
       setDashboardLoading(true);
-      const res = await fetch("http://localhost:5001/api/dashboard");
+      const res = await fetch(`${API_BASE}/api/dashboard`);
       if (res.ok) {
         const data = await res.json();
         setDashboardData(data);
@@ -109,7 +113,7 @@ export default function App() {
   const fetchServersData = async () => {
     try {
       setServersLoading(true);
-      const res = await fetch("http://localhost:5001/api/servers");
+      const res = await fetch(`${API_BASE}/api/servers`);
       if (res.ok) {
         const data = await res.json();
         setServers(data);
@@ -124,7 +128,7 @@ export default function App() {
   const restartServer = async (key) => {
     try {
       setRestartingKey(key);
-      const res = await fetch(`http://localhost:5001/api/servers/${key}/restart`, {
+      const res = await fetch(`${API_BASE}/api/servers/${key}/restart`, {
         method: "POST"
       });
       if (res.ok) {
@@ -149,7 +153,7 @@ export default function App() {
     if (!libQuery.trim()) return;
     try {
       setLibSearching(true);
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -177,7 +181,7 @@ export default function App() {
   const fetchHallMenu = async (hallKey) => {
     try {
       setHallLoading(true);
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -202,7 +206,7 @@ export default function App() {
   const loadEvents = async () => {
     try {
       setEventsLoading(true);
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -228,7 +232,7 @@ export default function App() {
     try {
       setRegistrationMsg(`Registering for ${eventId}...`);
       const email = `${personalization.name.toLowerCase().replace(/\s+/g, "")}@university.edu`;
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -251,7 +255,7 @@ export default function App() {
   const checkPrerequisites = async () => {
     try {
       setPrereqChecking(true);
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -284,7 +288,7 @@ export default function App() {
     setChatLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5001/api/chat", {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
